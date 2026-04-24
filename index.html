@@ -1,0 +1,1009 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>スポーツテック カオスマップ 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;600;700;900&family=Inter:wght@300;400;600;700;900&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', 'Noto Sans JP', sans-serif;
+    background: #0a0a1a;
+    color: #e0e0f0;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Animated gradient background */
+  .bg-gradient {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background:
+      radial-gradient(ellipse at 20% 20%, rgba(59, 130, 246, 0.12) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 80%, rgba(139, 92, 246, 0.10) 0%, transparent 50%),
+      radial-gradient(ellipse at 50% 50%, rgba(16, 185, 129, 0.06) 0%, transparent 60%),
+      linear-gradient(135deg, #0a0a1a 0%, #0f1029 50%, #0a0a1a 100%);
+    z-index: 0;
+    animation: bgPulse 12s ease-in-out infinite alternate;
+  }
+
+  @keyframes bgPulse {
+    0% { opacity: 1; }
+    100% { opacity: 0.8; }
+  }
+
+  .container {
+    position: relative;
+    z-index: 1;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+  }
+
+  /* Header */
+  .header {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .header h1 {
+    font-size: 2.6rem;
+    font-weight: 900;
+    background: linear-gradient(135deg, #60a5fa, #a78bfa, #34d399);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: -0.02em;
+    margin-bottom: 8px;
+  }
+
+  .header .subtitle {
+    font-size: 1rem;
+    color: #8888aa;
+    font-weight: 300;
+    letter-spacing: 0.1em;
+  }
+
+  /* Legend */
+  .legend {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    margin-bottom: 36px;
+    flex-wrap: wrap;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.85rem;
+    color: #9999bb;
+  }
+
+  .legend-dot {
+    width: 12px; height: 12px;
+    border-radius: 50%;
+  }
+
+  .legend-dot.jp { background: linear-gradient(135deg, #f87171, #ef4444); }
+  .legend-dot.intl { background: linear-gradient(135deg, #60a5fa, #3b82f6); }
+
+  /* Filter bar */
+  .filter-bar {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+  }
+
+  .filter-btn {
+    padding: 8px 18px;
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 24px;
+    background: rgba(255,255,255,0.04);
+    color: #9999bb;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-family: inherit;
+  }
+
+  .filter-btn:hover {
+    background: rgba(255,255,255,0.08);
+    color: #e0e0f0;
+  }
+
+  .filter-btn.active {
+    background: linear-gradient(135deg, rgba(59,130,246,0.25), rgba(139,92,246,0.25));
+    border-color: rgba(99,130,246,0.4);
+    color: #e0e0f0;
+  }
+
+  /* Category section */
+  .category {
+    margin-bottom: 40px;
+    border-radius: 20px;
+    padding: 28px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s;
+  }
+
+  .category::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.06);
+    pointer-events: none;
+  }
+
+  .cat-1 { background: linear-gradient(135deg, rgba(59,130,246,0.06) 0%, rgba(59,130,246,0.02) 100%); }
+  .cat-2 { background: linear-gradient(135deg, rgba(16,185,129,0.06) 0%, rgba(16,185,129,0.02) 100%); }
+  .cat-3 { background: linear-gradient(135deg, rgba(245,158,11,0.06) 0%, rgba(245,158,11,0.02) 100%); }
+  .cat-4 { background: linear-gradient(135deg, rgba(236,72,153,0.06) 0%, rgba(236,72,153,0.02) 100%); }
+  .cat-5 { background: linear-gradient(135deg, rgba(139,92,246,0.06) 0%, rgba(139,92,246,0.02) 100%); }
+
+  .category-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 22px;
+  }
+
+  .category-icon {
+    width: 44px; height: 44px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    flex-shrink: 0;
+  }
+
+  .cat-1 .category-icon { background: linear-gradient(135deg, #3b82f6, #2563eb); }
+  .cat-2 .category-icon { background: linear-gradient(135deg, #10b981, #059669); }
+  .cat-3 .category-icon { background: linear-gradient(135deg, #f59e0b, #d97706); }
+  .cat-4 .category-icon { background: linear-gradient(135deg, #ec4899, #db2777); }
+  .cat-5 .category-icon { background: linear-gradient(135deg, #8b5cf6, #7c3aed); }
+
+  .category-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #e0e0f0;
+  }
+
+  .category-title-en {
+    font-size: 0.78rem;
+    color: #7777aa;
+    font-weight: 400;
+    margin-top: 2px;
+  }
+
+  /* Subcategory */
+  .subcategory {
+    margin-bottom: 18px;
+  }
+
+  .subcategory:last-child { margin-bottom: 0; }
+
+  .sub-label {
+    font-size: 0.78rem;
+    color: #8888aa;
+    margin-bottom: 10px;
+    padding-left: 4px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  /* Company grid */
+  .company-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  /* Company card */
+  .company-card {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 16px;
+    border-radius: 12px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.06);
+    cursor: pointer;
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .company-card:hover {
+    transform: translateY(-4px) scale(1.04);
+    background: rgba(255,255,255,0.10);
+    border-color: rgba(255,255,255,0.18);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.4), 0 0 30px rgba(99,130,246,0.08);
+    z-index: 10;
+  }
+
+  .company-card.jp-card {
+    border-left: 3px solid rgba(239,68,68,0.5);
+  }
+
+  .company-card.intl-card {
+    border-left: 3px solid rgba(59,130,246,0.5);
+  }
+
+  .company-card.jp-card:hover {
+    border-left-color: #ef4444;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.4), 0 0 20px rgba(239,68,68,0.1);
+  }
+
+  .company-card.intl-card:hover {
+    border-left-color: #3b82f6;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.4), 0 0 20px rgba(59,130,246,0.1);
+  }
+
+  .company-logo {
+    width: 38px; height: 38px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 0.72rem;
+    flex-shrink: 0;
+    color: #fff;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+    overflow: hidden;
+    position: relative;
+  }
+
+  .company-logo img {
+    width: 100%; height: 100%;
+    object-fit: contain;
+    background: #fff;
+    border-radius: 6px;
+    padding: 4px;
+    display: block;
+  }
+
+  .company-logo .fallback {
+    display: none;
+    width: 100%; height: 100%;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+  }
+
+  .company-logo.no-img img { display: none; }
+  .company-logo.no-img .fallback { display: flex; }
+
+  .jp-card .company-logo { background: linear-gradient(135deg, #dc2626, #b91c1c); }
+  .jp-card .company-logo .fallback { background: linear-gradient(135deg, #dc2626, #b91c1c); }
+
+  .intl-card .company-logo { background: linear-gradient(135deg, #2563eb, #1d4ed8); }
+  .intl-card .company-logo .fallback { background: linear-gradient(135deg, #2563eb, #1d4ed8); }
+
+  .company-name {
+    font-size: 0.82rem;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  /* Tooltip */
+  .tooltip {
+    position: fixed;
+    padding: 14px 18px;
+    background: rgba(15, 15, 35, 0.96);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 12px;
+    font-size: 0.82rem;
+    color: #c8c8e0;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.25s;
+    z-index: 1000;
+    max-width: 300px;
+    line-height: 1.5;
+    box-shadow: 0 16px 48px rgba(0,0,0,0.6);
+  }
+
+  .tooltip.visible { opacity: 1; }
+
+  .tooltip .tt-name {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #e8e8ff;
+    margin-bottom: 4px;
+  }
+
+  .tooltip .tt-origin {
+    display: inline-block;
+    font-size: 0.68rem;
+    padding: 2px 8px;
+    border-radius: 6px;
+    margin-bottom: 6px;
+    font-weight: 600;
+  }
+
+  .tooltip .tt-origin.jp {
+    background: rgba(239,68,68,0.2);
+    color: #fca5a5;
+  }
+
+  .tooltip .tt-origin.intl {
+    background: rgba(59,130,246,0.2);
+    color: #93c5fd;
+  }
+
+  .tooltip .tt-desc {
+    font-size: 0.78rem;
+    color: #9999bb;
+  }
+
+  /* Search */
+  .search-wrap {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+  }
+
+  .search-input {
+    width: 360px;
+    padding: 12px 20px;
+    border-radius: 30px;
+    border: 1px solid rgba(255,255,255,0.1);
+    background: rgba(255,255,255,0.05);
+    color: #e0e0f0;
+    font-size: 0.9rem;
+    font-family: inherit;
+    outline: none;
+    transition: all 0.3s;
+  }
+
+  .search-input::placeholder { color: #666688; }
+  .search-input:focus {
+    border-color: rgba(99,130,246,0.5);
+    background: rgba(255,255,255,0.08);
+    box-shadow: 0 0 20px rgba(99,130,246,0.1);
+  }
+
+  /* Stats bar */
+  .stats-bar {
+    text-align: center;
+    margin-bottom: 36px;
+    font-size: 0.8rem;
+    color: #6666888;
+  }
+
+  .stats-bar span {
+    display: inline-block;
+    padding: 4px 14px;
+    background: rgba(255,255,255,0.04);
+    border-radius: 12px;
+    margin: 0 4px;
+    color: #8888aa;
+  }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    margin-top: 60px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    font-size: 0.75rem;
+    color: #555577;
+  }
+
+  /* Fade animation for filtering */
+  .company-card.hidden {
+    display: none;
+  }
+
+  .category.hidden-cat {
+    display: none;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .header h1 { font-size: 1.8rem; }
+    .category { padding: 18px; }
+    .company-card { padding: 8px 12px; }
+    .search-input { width: 100%; }
+  }
+</style>
+</head>
+<body>
+
+<div class="bg-gradient"></div>
+
+<div class="container">
+  <div class="header">
+    <h1>スポーツテック カオスマップ</h1>
+    <div class="subtitle">SPORTS TECHNOLOGY LANDSCAPE 2026</div>
+  </div>
+
+  <div class="search-wrap">
+    <input type="text" class="search-input" placeholder="🔍 企業名で検索..." id="searchInput">
+  </div>
+
+  <div class="legend">
+    <div class="legend-item"><div class="legend-dot jp"></div>日本ソリューション</div>
+    <div class="legend-item"><div class="legend-dot intl"></div>海外ソリューション</div>
+  </div>
+
+  <div class="filter-bar" id="filterBar">
+    <button class="filter-btn active" data-filter="all">すべて</button>
+    <button class="filter-btn" data-filter="cat-1">選手パフォーマンス</button>
+    <button class="filter-btn" data-filter="cat-2">コンディショニング・医療</button>
+    <button class="filter-btn" data-filter="cat-3">ビデオ・データ解析</button>
+    <button class="filter-btn" data-filter="cat-4">メンタル・次世代技術</button>
+    <button class="filter-btn" data-filter="cat-5">組織管理・データ基盤</button>
+    <button class="filter-btn" data-filter="jp">🇯🇵 日本のみ</button>
+    <button class="filter-btn" data-filter="intl">🌍 海外のみ</button>
+  </div>
+
+  <div class="stats-bar" id="statsBar"></div>
+
+  <div id="mapContainer">
+
+    <!-- ① 選手パフォーマンス -->
+    <div class="category cat-1" data-cat="cat-1">
+      <div class="category-header">
+        <div class="category-icon">⚡</div>
+        <div>
+          <div class="category-title">① 選手パフォーマンス</div>
+          <div class="category-title-en">Athlete Performance</div>
+        </div>
+      </div>
+
+      <div class="subcategory">
+        <div class="sub-label">A. トレーニング管理 / Training & Programming</div>
+        <div class="company-grid">
+          <a class="company-card intl-card" data-name="BRIDGE" data-origin="intl" data-desc="アスリート向けトレーニングプラットフォーム。ワークアウトの設計・管理を支援。" href="https://www.bridgeathletic.com" target="_blank">
+            <div class="company-logo"><img src="https://icon.horse/icon/bridgeathletic.com" alt="BRIDGE" onerror="this.parentElement.classList.add('no-img')"><span class="fallback">BR</span></div><div class="company-name">BRIDGE</div>
+          </a>
+          <a class="company-card intl-card" data-name="Volt Athletics" data-origin="intl" data-desc="AI搭載のトレーニングプログラム自動生成プラットフォーム。" href="https://www.voltathletics.com" target="_blank">
+            <div class="company-logo"><img src="https://icon.horse/icon/voltathletics.com" alt="Volt Athletics" onerror="this.parentElement.classList.add('no-img')"><span class="fallback">VA</span></div><div class="company-name">Volt Athletics</div>
+          </a>
+          <a class="company-card intl-card" data-name="TeamBuildr" data-origin="intl" data-desc="S&Cコーチ向けのトレーニング管理・プログラミングツール。" href="https://www.teambuildr.com" target="_blank">
+            <div class="company-logo"><img src="https://icon.horse/icon/teambuildr.com" alt="TeamBuildr" onerror="this.parentElement.classList.add('no-img')"><span class="fallback">TB</span></div><div class="company-name">TeamBuildr</div>
+          </a>
+          <a class="company-card intl-card" data-name="PLT4M" data-origin="intl" data-desc="学校・チーム向けフィットネス教育プラットフォーム。" href="https://plt4m.com" target="_blank">
+            <div class="company-logo"><img src="https://icon.horse/icon/plt4m.com" alt="PLT4M" onerror="this.parentElement.classList.add('no-img')"><span class="fallback">P4</span></div><div class="company-name">PLT4M</div>
+          </a>
+          <a class="company-card intl-card" data-name="Hexfit" data-origin="intl" data-desc="トレーニングプログラムの作成・クライアント管理ソフト。" href="https://www.hexfit.com" target="_blank">
+            <div class="company-logo"><img src="https://icon.horse/icon/hexfit.com" alt="Hexfit" onerror="this.parentElement.classList.add('no-img')"><span class="fallback">HF</span></div><div class="company-name">Hexfit</div>
+          </a>
+          <a class="company-card intl-card" data-name="TrainHeroic" data-origin="intl" data-desc="コーチとアスリートを繋ぐトレーニングマーケットプレイス。" href="https://www.trainheroic.com" target="_blank">
+            <div class="company-logo"><img src="https://icon.horse/icon/trainheroic.com" alt="TrainHeroic" onerror="this.parentElement.classList.add('no-img')"><span class="fallback">TH</span></div><div class="company-name">TrainHeroic</div>
+          </a>
+          <a class="company-card intl-card" data-name="Push" data-origin="intl" data-desc="速度ベースのトレーニング（VBT）ウェアラブルセンサー。" href="https://www.trainwithpush.com" target="_blank">
+            <div class="company-logo"><img src="https://icon.horse/icon/trainwithpush.com" alt="Push" onerror="this.parentElement.classList.add('no-img')"><span class="fallback">PU</span></div><div class="company-name">Push</div>
+          </a>
+        </div>
+      </div>
+
+      <div class="subcategory">
+        <div class="sub-label">B. ウェアラブル・負荷計測 / Wearables & Load Monitoring</div>
+        <div class="company-grid">
+          <a class="company-card intl-card" data-name="Catapult" data-origin="intl" data-desc="GPS・慣性センサーで選手の動きと負荷をリアルタイム計測。世界トップリーグで採用。" href="https://www.catapultsports.com" target="_blank">
+            <div class="company-logo"><img src="https://icon.horse/icon/catapultsports.com" alt="Catapult" onerror="this.parentElement.classList.add('no-img')"><span class="fallback">CA</span></div><div class="company-name">Catapult</div>
+          </a>
+          <a class="company-card intl-card" data-name="WHOOP" data-origin="intl" data-desc="心拍・睡眠・リカバリーを24/7モニタリングするウェアラブルバンド。" href="https://www.whoop.com" target="_blank">
+            <div class="company-logo"><img src="https://icon.horse/icon/whoop.com" alt="WHOOP" onerror="this.parentElement.classList.add('no-img')"><span class="fallback">WH</span></div><div class="company-name">WHOOP</div>
+          </a>
+          <a class="company-card intl-card" data-name="Oura" data-origin="intl" data-desc="睡眠・回復・活動量を追跡するスマートリング。" href="https://ouraring.com" target="_blank">
+            <div class="company-logo"><img src="https://icon.horse/icon/ouraring.com" alt="Oura" onerror="this.parentElement.classList.add('no-img')"><span class="fallback">OU</span></div><div class="company-name">Oura</div>
+          </a>
+          <a class="company-card intl-card" data-name="Garmin" data-origin="intl" data-desc="GPS・心拍モニタリング対応のスポーツウォッチ＆デバイス。" href="https://www.garmin.com" target="_blank">
+            <div class="company-logo"><img src="https://icon.horse/icon/garmin.com" alt="Garmin" onerror="this.parentElement.classList.add('no-img')"><span class="fallback">GA</span></div><div class="company-name">Garmin</div>
+          </a>
+          <a class="company-card intl-card" data-name="Polar" data-origin="intl" data-desc="心拍センサー＆GPSウォッチのパイオニア。チームモニタリングにも対応。" href="https://www.polar.com" target="_blank">
+            <div class="company-logo"><img src="https://icon.horse/icon/polar.com" alt="Polar" onerror="this.parentElement.classList.add('no-img')"><span class="fallback">PO</span></div><div class="company-name">Polar</div>
+          </a>
+          <a class="company-card intl-card" data-name="Apple Watch" data-origin="intl" data-desc="ヘルスケア＆フィットネストラッキング対応スマートウォッチ。" href="https://www.apple.com/apple-watch-series-10/" target="_blank">
+            <div class="company-logo"><img src="https://icon.horse/icon/apple.com" alt="Apple Watch" onerror="this.parentElement.classList.add('no-img')"><span class="fallback">AW</span></div><div class="company-name">Apple Watch</div>
+          </a>
+          <a class="company-card intl-card" data-name="Fitbit" data-origin="intl" data-desc="活動量・心拍・睡眠トラッキングのウェアラブルデバイス。" href="https://www.fitbit.com" target="_blank">
+            <div class="company-logo"><img src="https://icon.horse/icon/fitbit.com" alt="Fitbit" onerror="this.parentElement.classList.add('no-img')"><span class="fallback">FB</span></div><div class="company-name">Fitbit</div>
+          </a>
+          <a class="company-card intl-card" data-name="Zephyr" data-origin="intl" data-desc="胸部装着型バイオハーネスで生体データをリアルタイム収集。" href="https://www.zephyranywhere.com" target="_blank">
+            <div class="company-logo"><img src="https://icon.horse/icon/zephyranywhere.com" alt="Zephyr" onerror="this.parentElement.classList.add('no-img')"><span class="fallback">ZE</span></div><div class="company-name">Zephyr</div>
+          </a>
+          <a class="company-card intl-card" data-name="Zebra" data-origin="intl" data-desc="RFID・位置情報技術を活用したリアルタイム選手トラッキング。" href="https://www.zebra.com/us/en/solutions/industry/sports.html" target="_blank">
+            <div class="company-logo"><img src="https://icon.horse/icon/zebra.com" alt="Zebra" onerror="this.parentElement.classList.add('no-img')"><span class="fallback">ZB</span></div><div class="company-name">Zebra</div>
+          </a>
+          <a class="company-card intl-card" data-name="STATSports" data-origin="intl" data-desc="GPSベストでプレイヤーのパフォーマンスデータをリアルタイム取得。" href="https://statsports.com" target="_blank">
+            <div class="company-logo"><img src="https://icon.horse/icon/statsports.com" alt="STATSports" onerror="this.parentElement.classList.add('no-img')"><span class="fallback">SS</span></div><div class="company-name">STATSports</div>
+          </a>
+          <a class="company-card intl-card" data-name="Hexoskin" data-origin="intl" data-desc="スマートウェアで心拍・呼吸・活動量を連続モニタリング。" href="https://www.hexoskin.com" target="_blank">
+            <div class="company-logo"><img src="https://icon.horse/icon/hexoskin.com" alt="Hexoskin" onerror="this.parentElement.classList.add('no-img')"><span class="fallback">HX</span></div><div class="company-name">Hexoskin</div>
+          </a>
+          <a class="company-card intl-card" data-name="KINEXON" data-origin="intl" data-desc="超広帯域（UWB）技術で屋内外の高精度リアルタイム位置追跡。" href="https://kinexon.com" target="_blank">
+            <div class="company-logo"><img src="https://icon.horse/icon/kinexon.com" alt="KINEXON" onerror="this.parentElement.classList.add('no-img')"><span class="fallback">KN</span></div><div class="company-name">KINEXON</div>
+          </a>
+          <a class="company-card intl-card" data-name="VX Sport" data-origin="intl" data-desc="GPSベースのアスリートパフォーマンスモニタリングシステム。" href="https://www.vxsport.com" target="_blank">
+            <div class="company-logo"><img src="https://icon.horse/icon/vxsport.com" alt="VX Sport" onerror="this.parentElement.classList.add('no-img')"><span class="fallback">VX</span></div><div class="company-name">VX Sport</div>
+          </a>
+          <a class="company-card intl-card" data-name="PlayerData" data-origin="intl" data-desc="小型ウェアラブルGPSトラッカーで選手のパフォーマンスデータ取得。" href="https://playerdata.com" target="_blank">
+            <div class="company-logo"><img src="https://icon.horse/icon/playerdata.com" alt="PlayerData" onerror="this.parentElement.classList.add('no-img')"><span class="fallback">PD</span></div><div class="company-name">PlayerData</div>
+          </a>
+          <a class="company-card intl-card" data-name="Wimu" data-origin="intl" data-desc="GPS・加速度・心拍を統合したスペイン発のトラッキングシステム。" href="https://www.wimupro.com" target="_blank">
+            <div class="company-logo"><img src="https://icon.horse/icon/wimupro.com" alt="Wimu" onerror="this.parentElement.classList.add('no-img')"><span class="fallback">WI</span></div><div class="company-name">Wimu</div>
+          </a>
+          <a class="company-card intl-card" data-name="Johan Sports" data-origin="intl" data-desc="オランダ発のGPSパフォーマンストラッキングソリューション。" href="https://johan.ai" target="_blank">
+            <div class="company-logo"><img src="https://icon.horse/icon/johan.ai" alt="Johan Sports" onerror="this.parentElement.classList.add('no-img')"><span class="fallback">JO</span></div><div class="company-name">Johan Sports</div>
+          </a>
+          <a class="company-card intl-card" data-name="GPSports" data-origin="intl" data-desc="GPSベースの選手トラッキング・パフォーマンス解析デバイス。" href="https://gpsports.com" target="_blank">
+            <div class="company-logo"><img src="https://icon.horse/icon/gpsports.com" alt="GPSports" onerror="this.parentElement.classList.add('no-img')"><span class="fallback">GP</span></div><div class="company-name">GPSports</div>
+          </a>
+          <a class="company-card intl-card" data-name="Field Wiz" data-origin="intl" data-desc="高精度ローカルポジショニングシステム（LPS）でチーム戦術分析。" href="https://fieldwiz.com" target="_blank">
+            <div class="company-logo"><img src="https://icon.horse/icon/fieldwiz.com" alt="Field Wiz" onerror="this.parentElement.classList.add('no-img')"><span class="fallback">FW</span></div><div class="company-name">Field Wiz</div>
+          </a>
+          <a class="company-card intl-card" data-name="Elite Form" data-origin="intl" data-desc="S&Cトレーニング向けのセンサー連携プラットフォーム。" href="https://www.eliteform.com" target="_blank">
+            <div class="company-logo"><img src="https://icon.horse/icon/eliteform.com" alt="Elite Form" onerror="this.parentElement.classList.add('no-img')"><span class="fallback">EF</span></div><div class="company-name">Elite Form</div>
+          </a>
+          <a class="company-card intl-card" data-name="TitanSports" data-origin="intl" data-desc="選手の位置情報とパフォーマンスデータを統合分析。" href="https://www.titan.com" target="_blank">
+            <div class="company-logo"><img src="https://icon.horse/icon/titan.com" alt="TitanSports" onerror="this.parentElement.classList.add('no-img')"><span class="fallback">TS</span></div><div class="company-name">TitanSports</div>
+          </a>
+          <a class="company-card intl-card" data-name="SondaSports" data-origin="intl" data-desc="ウェアラブルGPSトラッキングデバイスでチームパフォーマンス管理。" href="https://sondasports.com" target="_blank">
+            <div class="company-logo"><img src="https://icon.horse/icon/sondasports.com" alt="SondaSports" onerror="this.parentElement.classList.add('no-img')"><span class="fallback">SO</span></div><div class="company-name">SondaSports</div>
+          </a>
+        </div>
+      </div>
+
+      <div class="subcategory">
+        <div class="sub-label">C. バイオメカニクス・テスト / Testing & Force Plates</div>
+        <div class="company-grid">
+          <a class="company-card intl-card" data-name="VALD" data-origin="intl" data-desc="NordBord等のフォースプレートで筋力・パワーを科学的に評価。" href="https://www.vfrce.com" target="_blank">
+            <div class="company-logo"><img src="https://icon.horse/icon/vfrce.com" alt="VALD" onerror="this.parentElement.classList.add('no-img')"><span class="fallback">VD</span></div><div class="company-name">VALD</div>
+          </a>
+          <a class="company-card intl-card" data-name="Hawkin Dynamics" data-origin="intl" data-desc="ポータブルフォースプレートでジャンプ・着地の力学データを取得。" href="https://www.hawkindynamics.com" target="_blank">
+            <div class="company-logo"><img src="https://icon.horse/icon/hawkindynamics.com" alt="Hawkin Dynamics" onerror="this.parentElement.classList.add('no-img')"><span class="fallback">HD</span></div><div class="company-name">Hawkin Dynamics</div>
+          </a>
+          <a class="company-card intl-card" data-name="Kistler" data-origin="intl" data-desc="スイス発、高精度フォースプレート・圧力センサーのグローバルリーダー。" href="https://www.kistler.com" target="_blank">
+            <div class="company-logo"><img src="https://icon.horse/icon/kistler.com" alt="Kistler" onerror="this.parentElement.classList.add('no-img')"><span class="fallback">KS</span></div><div class="company-name">Kistler</div>
+          </a>
+          <a class="company-card intl-card" data-name="AMTI" data-origin="intl" data-desc="バイオメカニクス研究用フォースプレートの老舗メーカー。" href="https://www.amti.biz" target="_blank">
+            <div class="company-logo"><img src="https://icon.horse/icon/amti.biz" alt="AMTI" onerror="this.parentElement.classList.add('no-img')"><span class="fallback">AM</span></div><div class="company-name">AMTI</div>
+          </a>
+          <a class="company-card intl-card" data-name="Sparta Science" data-origin="intl" data-desc="フォースプレートとAIで怪我リスクを評価・予測するプラットフォーム。" href="https://www.spartascience.com" target="_blank">
+            <div class="company-logo"><img src="https://icon.horse/icon/spartascience.com" alt="Sparta Science" onerror="this.parentElement.classList.add('no-img')"><span class="fallback">SP</span></div><div class="company-name">Sparta Science</div>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ② コンディショニング・医療 -->
+    <div class="category cat-2" data-cat="cat-2">
+      <div class="category-header">
+        <div class="category-icon">💚</div>
+        <div>
+          <div class="category-title">② コンディショニング・医療</div>
+          <div class="category-title-en">Medical & Recovery</div>
+        </div>
+      </div>
+
+      <div class="subcategory">
+        <div class="sub-label">A. リカバリー・睡眠 / Recovery & Sleep</div>
+        <div class="company-grid">
+          <a class="company-card intl-card" data-name="Hyperice" data-origin="intl" data-desc="バイブレーション・コンプレッション等のリカバリーデバイス。NBAやMLBで採用。" href="https://www.hyperice.com" target="_blank">
+            <div class="company-logo"><img src="https://icon.horse/icon/hyperice.com" alt="Hyperice" onerror="this.parentElement.classList.add('no-img')"><span class="fallback">HI</span></div><div class="company-name">Hyperice</div>
+          </a>
+          <a class="company-card intl-card" data-name="Fatigue Science" data-origin="intl" data-desc="睡眠データから疲労レベルとパフォーマンスへの影響を予測。" href="https://www.fatiguescience.com" target="_blank">
+            <div class="company-logo"><img src="https://icon.horse/icon/fatiguescience.com" alt="Fatigue Science" onerror="this.parentElement.classList.add('no-img')"><span class="fallback">FS</span></div><div class="company-name">Fatigue Science</div>
+          </a>
+          <a class="company-card intl-card" data-name="Rise" data-origin="intl" data-desc="睡眠負債と概日リズムを追跡し、最適パフォーマンス時間を特定。" href="https://www.risescience.com" target="_blank">
+            <div class="company-logo"><img src="https://icon.horse/icon/risescience.com" alt="Rise" onerror="this.parentElement.classList.add('no-img')"><span class="fallback">RI</span></div><div class="company-name">Rise</div>
+          </a>
+          <a class="company-card intl-card" data-name="RecoverX" data-origin="intl" data-desc="統合的リカバリーモニタリングプラットフォーム。" href="https://recoverx.com" target="_blank">
+            <div class="company-logo"><img src="https://icon.horse/icon/recoverx.com" alt="RecoverX" onerror="this.parentElement.classList.add('no-img')"><span class="fallback">RX</span></div><div class="company-name">RecoverX</div>
+          </a>
+          <a class="company-card intl-card" data-name="SOMNOFY" data-origin="intl" data-desc="非接触型の睡眠モニタリングデバイス。ベッドサイドに置くだけで計測。" href="https://www.somnofy.com" target="_blank">
+            <div class="company-logo"><img src="https://icon.horse/icon/somnofy.com" alt="SOMNOFY" onerror="this.parentElement.classList.add('no-img')"><span class="fallback">SM</span></div><div class="company-name">SOMNOFY</div>
+          </a>
+        </div>
+      </div>
+
+      <div class="subcategory">
+        <div class="sub-label">B. メディカル・身体組成 / Medical & Body Composition</div>
+        <div class="company-grid">
+          <a class="company-card intl-card" data-name="InBody" data-origin="intl" data-desc="体組成計のグローバルリーダー。筋肉量・体脂肪率を高精度で計測。" href="https://www.inbody.com" target="_blank">
+            <div class="company-logo"><img src="https://icon.horse/icon/inbody.com" alt="InBody" onerror="this.parentElement.classList.add('no-img')"><span class="fallback">IB</span></div><div class="company-name">InBody</div>
+          </a>
+          <a class="company-card intl-card" data-name="DXA" data-origin="intl" data-desc="二重エネルギーX線吸収法による骨密度・体組成の精密測定。" href="https://www.gehealthcare.com" target="_blank">
+            <div class="company-logo"><img src="https://icon.horse/icon/gehealthcare.com" alt="DXA" onerror="this.parentElement.classList.add('no-img')"><span class="fallback">DX</span></div><div class="company-name">DXA</div>
+          </a>
+          <a class="company-card intl-card" data-name="BodPod" data-origin="intl" data-desc="空気置換法で体脂肪率を正確に測定するボディコンポジション装置。" href="https://www.cosmed.com/bodpod" target="_blank">
+            <div class="company-logo"><img src="https://icon.horse/icon/cosmed.com" alt="BodPod" onerror="this.parentElement.classList.add('no-img')"><span class="fallback">BP</span></div><div class="company-name">BodPod</div>
+          </a>
+          <a class="company-card intl-card" data-name="Kitman Labs" data-origin="intl" data-desc="150+のデータソースを統合するアスリートデータプラットフォーム。怪我予測にも対応。" href="https://www.kitmanlabs.com" target="_blank">
+            <div class="company-logo"><img src="https://icon.horse/icon/kitmanlabs.com" alt="Kitman Labs" onerror="this.parentElement.classList.add('no-img')"><span class="fallback">KL</span></div><div class="company-name">Kitman Labs</div>
+          </a>
+          <a class="company-card intl-card" data-name="Physimax" data-origin="intl" data-desc="AIベースの動作解析で怪我リスクと身体的準備状態を評価。" href="https://www.physimax.com" target="_blank">
+            <div class="company-logo"><img src="https://icon.horse/icon/physimax.com" alt="Physimax" onerror="this.parentElement.classList.add('no-img')"><span class="fallback">PM</span></div><div class="company-name">Physimax</div>
+          </a>
+        </div>
+      </div>
+
+      <div class="subcategory">
+        <div class="sub-label">C. 栄養（水分補給含む） / Nutrition</div>
+        <div class="company-grid">
+          <a class="company-card intl-card" data-name="MyFitnessPal" data-origin="intl" data-desc="食事ログ・カロリー・栄養素トラッキングアプリ。" href="https://www.myfitnesspal.com" target="_blank">
+            <div class="company-logo"><img src="https://icon.horse/icon/myfitnesspal.com" alt="MyFitnessPal" onerror="this.parentElement.classList.add('no-img')"><span class="fallback">MF</span></div><div class="company-name">MyFitnessPal</div>
+          </a>
+          <a class="company-card intl-card" data-name="Notemeal" data-origin="intl" data-desc="チームスポーツ向けの栄養管理・食事計画プラットフォーム。" href="https://www.notemeal.com" target="_blank">
+            <div class="company-logo"><img src="https://icon.horse/icon/notemeal.com" alt="Notemeal" onerror="this.parentElement.classList.add('no-img')"><span class="fallback">NM</span></div><div class="company-name">Notemeal</div>
+          </a>
+          <a class="company-card intl-card" data-name="Gatorade Gx" data-origin="intl" data-desc="個人の発汗データに基づくカスタマイズ水分補給ソリューション。" href="https://www.gatorade.com/gx" target="_blank">
+            <div class="company-logo"><img src="https://icon.horse/icon/gatorade.com" alt="Gatorade Gx" onerror="this.parentElement.classList.add('no-img')"><span class="fallback">GX</span></div><div class="company-name">Gatorade Gx</div>
+          </a>
+          <a class="company-card intl-card" data-name="MX3" data-origin="intl" data-desc="唾液検査で脱水状態をリアルタイムモニタリング。" href="https://mx3diagnostics.com" target="_blank">
+            <div class="company-logo"><img src="https://icon.horse/icon/mx3diagnostics.com" alt="MX3" onerror="this.parentElement.classList.add('no-img')"><span class="fallback">M3</span></div><div class="company-name">MX3</div>
+          </a>
+          <a class="company-card intl-card" data-name="ZoneIn (Teamworks)" data-origin="intl" data-desc="Teamworksプラットフォーム内の栄養管理モジュール。" href="https://www.teamworks.com" target="_blank">
+            <div class="company-logo"><img src="https://icon.horse/icon/teamworks.com" alt="ZoneIn (Teamworks)" onerror="this.parentElement.classList.add('no-img')"><span class="fallback">ZI</span></div><div class="company-name">ZoneIn</div>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ③ ビデオ・データ解析 -->
+    <div class="category cat-3" data-cat="cat-3">
+      <div class="category-header">
+        <div class="category-icon">🎬</div>
+        <div>
+          <div class="category-title">③ ビデオ・データ解析</div>
+          <div class="category-title-en">Video & Analytics</div>
+        </div>
+      </div>
+
+      <div class="subcategory">
+        <div class="sub-label">A. ビデオ解析 / Video Analysis</div>
+        <div class="company-grid">
+          <a class="company-card intl-card" data-name="Hudl" data-origin="intl" data-desc="世界最大のスポーツ映像分析プラットフォーム。試合・練習映像の共有・解析。" href="https://www.hudl.com" target="_blank">
+            <div class="company-logo"><img src="https://icon.horse/icon/hudl.com" alt="Hudl" onerror="this.parentElement.classList.add('no-img')"><span class="fallback">HU</span></div><div class="company-name">Hudl</div>
+          </a>
+          <a class="company-card intl-card" data-name="Dartfish" data-origin="intl" data-desc="映像解析・タグ付け・パフォーマンス比較ツール。スイス発。" href="https://www.dartfish.com" target="_blank">
+            <div class="company-logo"><img src="https://icon.horse/icon/dartfish.com" alt="Dartfish" onerror="this.parentElement.classList.add('no-img')"><span class="fallback">DF</span></div><div class="company-name">Dartfish</div>
+          </a>
+          <a class="company-card intl-card" data-name="Spiideo" data-origin="intl" data-desc="AI自動カメラで試合を無人撮影・ストリーミング・分析。" href="https://www.spiideo.com" target="_blank">
+            <div class="company-logo"><img src="https://icon.horse/icon/spiideo.com" alt="Spiideo" onerror="this.parentElement.classList.add('no-img')"><span class="fallback">SI</span></div><div class="company-name">Spiideo</div>
+          </a>
+          <a class="company-card intl-card" data-name="PlaySight" data-origin="intl" data-desc="スマートコート技術で自動映像撮影・ライブストリーミング。" href="https://www.playsight.com" target="_blank">
+            <div class="company-logo"><img src="https://icon.horse/icon/playsight.com" alt="PlaySight" onerror="this.parentElement.classList.add('no-img')"><span class="fallback">PS</span></div><div class="company-name">PlaySight</div>
+          </a>
+          <a class="company-card intl-card" data-name="XOS Digital" data-origin="intl" data-desc="プロ・大学チーム向けビデオ管理＆解析プラットフォーム。" href="https://www.xosdigital.com" target="_blank">
+            <div class="company-logo"><img src="https://icon.horse/icon/xosdigital.com" alt="XOS Digital" onerror="this.parentElement.classList.add('no-img')"><span class="fallback">XO</span></div><div class="company-name">XOS Digital</div>
+          </a>
+          <a class="company-card intl-card" data-name="Pixellot" data-origin="intl" data-desc="AI搭載無人カメラで自動撮影・制作。放送品質の映像を低コストで。" href="https://www.pixellot.tv" target="_blank">
+            <div class="company-logo"><img src="https://icon.horse/icon/pixellot.tv" alt="Pixellot" onerror="this.parentElement.classList.add('no-img')"><span class="fallback">PX</span></div><div class="company-name">Pixellot</div>
+          </a>
+          <a class="company-card intl-card" data-name="ScoreBreak" data-origin="intl" data-desc="試合映像のハイライト自動生成・SNS向けクリップ作成。" href="https://www.scorebreak.com" target="_blank">
+            <div class="company-logo"><img src="https://icon.horse/icon/scorebreak.com" alt="ScoreBreak" onerror="this.parentElement.classList.add('no-img')"><span class="fallback">SB</span></div><div class="company-name">ScoreBreak</div>
+          </a>
+          <a class="company-card jp-card" data-name="FL-UX" data-origin="jp" data-desc="日本発のスポーツ映像解析ソリューション。サッカーを中心に展開。" href="https://fl-ux.jp" target="_blank">
+            <div class="company-logo"><img src="https://icon.horse/icon/fl-ux.jp" alt="FL-UX" onerror="this.parentElement.classList.add('no-img')"><span class="fallback">FX</span></div><div class="company-name">FL-UX</div>
+          </a>
+          <a class="company-card jp-card" data-name="SPLYZA Teams" data-origin="jp" data-desc="チームで映像を共有・分析。選手自ら映像を見て学ぶ文化を醸成。" href="https://www.splyza.com/teams" target="_blank">
+            <div class="company-logo"><img src="https://icon.horse/icon/splyza.com" alt="SPLYZA Teams" onerror="this.parentElement.classList.add('no-img')"><span class="fallback">ST</span></div><div class="company-name">SPLYZA Teams</div>
+          </a>
+          <a class="company-card jp-card" data-name="Playbox" data-origin="jp" data-desc="日本発の試合分析ツール。タグ付け・クリップ作成で戦術分析を支援。" href="https://playbox.jp" target="_blank">
+            <div class="company-logo"><img src="https://icon.horse/icon/playbox.jp" alt="Playbox" onerror="this.parentElement.classList.add('no-img')"><span class="fallback">PB</span></div><div class="company-name">Playbox</div>
+          </a>
+        </div>
+      </div>
+
+      <div class="subcategory">
+        <div class="sub-label">B. トラッキング・統計 / Tracking & Stats</div>
+        <div class="company-grid">
+          <a class="company-card intl-card" data-name="Second Spectrum" data-origin="intl" data-desc="コンピュータビジョンでリアルタイム選手・ボール追跡。NBA公式データパートナー。" href="https://www.secondspectrum.com" target="_blank">
+            <div class="company-logo"><img src="https://icon.horse/icon/secondspectrum.com" alt="Second Spectrum" onerror="this.parentElement.classList.add('no-img')"><span class="fallback">2S</span></div><div class="company-name">Second Spectrum</div>
+          </a>
+          <a class="company-card intl-card" data-name="ShotTracker" data-origin="intl" data-desc="バスケットボール向けリアルタイムシューティング分析システム。" href="https://shottracker.com" target="_blank">
+            <div class="company-logo"><img src="https://icon.horse/icon/shottracker.com" alt="ShotTracker" onerror="this.parentElement.classList.add('no-img')"><span class="fallback">SH</span></div><div class="company-name">ShotTracker</div>
+          </a>
+          <a class="company-card intl-card" data-name="Sportradar" data-origin="intl" data-desc="スポーツデータ・AI分析のグローバルリーダー。ベッティングデータも提供。" href="https://www.sportradar.com" target="_blank">
+            <div class="company-logo"><img src="https://icon.horse/icon/sportradar.com" alt="Sportradar" onerror="this.parentElement.classList.add('no-img')"><span class="fallback">SR</span></div><div class="company-name">Sportradar</div>
+          </a>
+          <a class="company-card intl-card" data-name="Opta" data-origin="intl" data-desc="サッカーを中心としたイベントデータ・統計の世界的プロバイダー。" href="https://www.statsperform.com/opta" target="_blank">
+            <div class="company-logo"><img src="https://icon.horse/icon/statsperform.com" alt="Opta" onerror="this.parentElement.classList.add('no-img')"><span class="fallback">OP</span></div><div class="company-name">Opta</div>
+          </a>
+          <a class="company-card intl-card" data-name="Trackman" data-origin="intl" data-desc="ドップラーレーダーでボール軌道を精密計測。ゴルフ・野球で活用。" href="https://www.trackman.com" target="_blank">
+            <div class="company-logo"><img src="https://icon.horse/icon/trackman.com" alt="Trackman" onerror="this.parentElement.classList.add('no-img')"><span class="fallback">TM</span></div><div class="company-name">Trackman</div>
+          </a>
+          <a class="company-card intl-card" data-name="Rapsodo" data-origin="intl" data-desc="カメラ＆レーダーで投球・打球データを計測。野球・ゴルフ向け。" href="https://rapsodo.com" target="_blank">
+            <div class="company-logo"><img src="https://icon.horse/icon/rapsodo.com" alt="Rapsodo" onerror="this.parentElement.classList.add('no-img')"><span class="fallback">RA</span></div><div class="company-name">Rapsodo</div>
+          </a>
+          <a class="company-card intl-card" data-name="Hawk-Eye" data-origin="intl" data-desc="ボールトラッキング技術。テニス・サッカーのVAR判定に使用。" href="https://www.hawkeyeinnovations.com" target="_blank">
+            <div class="company-logo"><img src="https://icon.horse/icon/hawkeyeinnovations.com" alt="Hawk-Eye" onerror="this.parentElement.classList.add('no-img')"><span class="fallback">HE</span></div><div class="company-name">Hawk-Eye</div>
+          </a>
+          <a class="company-card intl-card" data-name="Sportian" data-origin="intl" data-desc="旧MediaCoach。光学トラッキングで試合データを取得・分析。" href="https://www.sportian.com" target="_blank">
+            <div class="company-logo"><img src="https://icon.horse/icon/sportian.com" alt="Sportian" onerror="this.parentElement.classList.add('no-img')"><span class="fallback">SN</span></div><div class="company-name">Sportian</div>
+          </a>
+          <a class="company-card intl-card" data-name="Instat (Hudl)" data-origin="intl" data-desc="詳細な試合統計・選手評価レポートを提供。現Hudl傘下。" href="https://instatsport.com" target="_blank">
+            <div class="company-logo"><img src="https://icon.horse/icon/instatsport.com" alt="Instat (Hudl)" onerror="this.parentElement.classList.add('no-img')"><span class="fallback">IN</span></div><div class="company-name">Instat</div>
+          </a>
+          <a class="company-card intl-card" data-name="Impect (Catapult)" data-origin="intl" data-desc="パッキングモデル等の先進的サッカー分析。現Catapult傘下。" href="https://www.catapultsports.com" target="_blank">
+            <div class="company-logo"><img src="https://icon.horse/icon/catapultsports.com" alt="Impect (Catapult)" onerror="this.parentElement.classList.add('no-img')"><span class="fallback">IM</span></div><div class="company-name">Impect</div>
+          </a>
+          <a class="company-card intl-card" data-name="Sportec" data-origin="intl" data-desc="ブンデスリーガ公式データパートナー。試合データ収集・配信。" href="https://www.sportec-solutions.de" target="_blank">
+            <div class="company-logo"><img src="https://icon.horse/icon/sportec-solutions.de" alt="Sportec" onerror="this.parentElement.classList.add('no-img')"><span class="fallback">SC</span></div><div class="company-name">Sportec</div>
+          </a>
+          <a class="company-card jp-card" data-name="Deltatore" data-origin="jp" data-desc="日本発のスポーツデータ分析企業。Jリーグ等でデータ提供。" href="https://www.deltatore.com" target="_blank">
+            <div class="company-logo"><img src="https://icon.horse/icon/deltatore.com" alt="Deltatore" onerror="this.parentElement.classList.add('no-img')"><span class="fallback">DL</span></div><div class="company-name">Deltatore</div>
+          </a>
+          <a class="company-card jp-card" data-name="Knows" data-origin="jp" data-desc="日本発の光学式トラッキングシステム。選手の位置情報を高精度で取得。" href="https://knows-inc.com" target="_blank">
+            <div class="company-logo"><img src="https://icon.horse/icon/knows-inc.com" alt="Knows" onerror="this.parentElement.classList.add('no-img')"><span class="fallback">KN</span></div><div class="company-name">Knows</div>
+          </a>
+          <a class="company-card jp-card" data-name="Digitalyst" data-origin="jp" data-desc="日本発のスポーツデータ解析プラットフォーム。" href="https://digitalyst.co.jp" target="_blank">
+            <div class="company-logo"><img src="https://icon.horse/icon/digitalyst.co.jp" alt="Digitalyst" onerror="this.parentElement.classList.add('no-img')"><span class="fallback">DG</span></div><div class="company-name">Digitalyst</div>
+          </a>
+          <a class="company-card jp-card" data-name="Football Box" data-origin="jp" data-desc="サッカーに特化した日本発の光学式トラッキングシステム。" href="https://footballbox.jp" target="_blank">
+            <div class="company-logo"><img src="https://icon.horse/icon/footballbox.jp" alt="Football Box" onerror="this.parentElement.classList.add('no-img')"><span class="fallback">FB</span></div><div class="company-name">Football Box</div>
+          </a>
+          <a class="company-card intl-card" data-name="sportview" data-origin="intl" data-desc="AIカメラベースのスポーツ映像・データプラットフォーム。" href="https://sportview.ai" target="_blank">
+            <div class="company-logo"><img src="https://icon.horse/icon/sportview.ai" alt="sportview" onerror="this.parentElement.classList.add('no-img')"><span class="fallback">SV</span></div><div class="company-name">sportview</div>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ④ メンタル・次世代技術 -->
+    <div class="category cat-4" data-cat="cat-4">
+      <div class="category-header">
+        <div class="category-icon">🧠</div>
+        <div>
+          <div class="category-title">④ メンタル・次世代技術</div>
+          <div class="category-title-en">Cognitive & Extended Reality</div>
+        </div>
+      </div>
+
+      <div class="subcategory">
+        <div class="sub-label">A. 脳トレ・認知機能 / Brain Training & Cognitive</div>
+        <div class="company-grid">
+          <a class="company-card intl-card" data-name="NeuroTracker" data-origin="intl" data-desc="3D多物体追跡で認知能力・集中力を科学的にトレーニング。" href="https://www.neurotracker.net" target="_blank">
+            <div class="company-logo"><img src="https://icon.horse/icon/neurotracker.net" alt="NeuroTracker" onerror="this.parentElement.classList.add('no-img')"><span class="fallback">NT</span></div><div class="company-name">NeuroTracker</div>
+          </a>
+          <a class="company-card intl-card" data-name="Senaptec" data-origin="intl" data-desc="視覚・感覚パフォーマンスの評価＆トレーニングプラットフォーム。" href="https://www.senaptec.com" target="_blank">
+            <div class="company-logo"><img src="https://icon.horse/icon/senaptec.com" alt="Senaptec" onerror="this.parentElement.classList.add('no-img')"><span class="fallback">SN</span></div><div class="company-name">Senaptec</div>
+          </a>
+          <a class="company-card intl-card" data-name="Halo Neuroscience" data-origin="intl" data-desc="経頭蓋直流刺激（tDCS）で運動学習を加速するニューロスティミュレーション。" href="https://www.haloneuro.com" target="_blank">
+            <div class="company-logo"><img src="https://icon.horse/icon/haloneuro.com" alt="Halo Neuroscience" onerror="this.parentElement.classList.add('no-img')"><span class="fallback">HL</span></div><div class="company-name">Halo Neuroscience</div>
+          </a>
+          <a class="company-card intl-card" data-name="Lucid" data-origin="intl" data-desc="脳波センサーで認知負荷・脳震盪リスクをリアルタイム評価。" href="https://www.lucid.me" target="_blank">
+            <div class="company-logo"><img src="https://icon.horse/icon/lucid.me" alt="Lucid" onerror="this.parentElement.classList.add('no-img')"><span class="fallback">LC</span></div><div class="company-name">Lucid</div>
+          </a>
+          <a class="company-card intl-card" data-name="REZZIL" data-origin="intl" data-desc="VR認知トレーニング。サッカー等のスキル開発にゲーミフィケーション活用。" href="https://rezzil.com" target="_blank">
+            <div class="company-logo"><img src="https://icon.horse/icon/rezzil.com" alt="REZZIL" onerror="this.parentElement.classList.add('no-img')"><span class="fallback">RZ</span></div><div class="company-name">REZZIL</div>
+          </a>
+        </div>
+      </div>
+
+      <div class="subcategory">
+        <div class="sub-label">B. VR/AR / Virtual & Augmented Reality</div>
+        <div class="company-grid">
+          <a class="company-card intl-card" data-name="STRIVR" data-origin="intl" data-desc="VRイマーシブトレーニング。NFL・MLB等で意思決定スキル向上に活用。" href="https://www.strivr.com" target="_blank">
+            <div class="company-logo"><img src="https://icon.horse/icon/strivr.com" alt="STRIVR" onerror="this.parentElement.classList.add('no-img')"><span class="fallback">ST</span></div><div class="company-name">STRIVR</div>
+          </a>
+          <a class="company-card intl-card" data-name="EON Sports" data-origin="intl" data-desc="VRトレーニングで野球のバッティング・ピッチング練習をシミュレーション。" href="https://www.eonsportsvr.com" target="_blank">
+            <div class="company-logo"><img src="https://icon.horse/icon/eonsportsvr.com" alt="EON Sports" onerror="this.parentElement.classList.add('no-img')"><span class="fallback">EO</span></div><div class="company-name">EON Sports</div>
+          </a>
+          <a class="company-card intl-card" data-name="Magic Leap" data-origin="intl" data-desc="AR/MRヘッドセット技術。スポーツの没入型トレーニングに応用可能。" href="https://www.magicleap.com" target="_blank">
+            <div class="company-logo"><img src="https://icon.horse/icon/magicleap.com" alt="Magic Leap" onerror="this.parentElement.classList.add('no-img')"><span class="fallback">ML</span></div><div class="company-name">Magic Leap</div>
+          </a>
+          <a class="company-card intl-card" data-name="Mixed River" data-origin="intl" data-desc="MR技術を活用したスポーツトレーニング・エンターテインメント。" href="https://mixedriver.com" target="_blank">
+            <div class="company-logo"><img src="https://icon.horse/icon/mixedriver.com" alt="Mixed River" onerror="this.parentElement.classList.add('no-img')"><span class="fallback">MR</span></div><div class="company-name">Mixed River</div>
+          </a>
+          <a class="company-card jp-card" data-name="Sportip" data-origin="jp" data-desc="日本発。AIポーズ推定でスポーツのフォーム解析・改善を支援。" href="https://sportip.ai" target="_blank">
+            <div class="company-logo"><img src="https://icon.horse/icon/sportip.ai" alt="Sportip" onerror="this.parentElement.classList.add('no-img')"><span class="fallback">SP</span></div><div class="company-name">Sportip</div>
+          </a>
+          <a class="company-card jp-card" data-name="SPLYZA motion" data-origin="jp" data-desc="スマホで撮影した映像からAIが骨格推定・動作分析を自動実行。" href="https://www.splyza.com/motion" target="_blank">
+            <div class="company-logo"><img src="https://icon.horse/icon/splyza.com" alt="SPLYZA motion" onerror="this.parentElement.classList.add('no-img')"><span class="fallback">SM</span></div><div class="company-name">SPLYZA motion</div>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ⑤ 組織管理・データ基盤 -->
+    <div class="category cat-5" data-cat="cat-5">
+      <div class="category-header">
+        <div class="category-icon">🏢</div>
+        <div>
+          <div class="category-title">⑤ 組織管理・データ基盤</div>
+          <div class="category-title-en">Operations & Data Management</div>
+        </div>
+      </div>
+
+      <div class="subcategory">
+        <div class="sub-label">A. アスリート管理システム / AMS</div>
+        <div class="company-grid">
+          <a class="company-card intl-card" data-name="Smartabase (Teamworks)" data-origin="intl" data-desc="カスタマイズ可能なAMS。トレーニング・怪我・ウェルネスデータを一元管理。" href="https://www.teamworks.com/smartabase" target="_blank">
+            <div class="company-logo"><img src="https://icon.horse/icon/teamworks.com" alt="Smartabase (Teamworks)" onerror="this.parentElement.classList.add('no-img')"><span class="fallback">SB</span></div><div class="company-name">Smartabase</div>
+          </a>
+          <a class="company-card intl-card" data-name="Kitman Labs" data-origin="intl" data-desc="150+データソース統合のAMS。怪我予測・パフォーマンス最適化。" href="https://www.kitmanlabs.com" target="_blank">
+            <div class="company-logo"><img src="https://icon.horse/icon/kitmanlabs.com" alt="Kitman Labs" onerror="this.parentElement.classList.add('no-img')"><span class="fallback">KL</span></div><div class="company-name">Kitman Labs</div>
+          </a>
+          <a class="company-card intl-card" data-name="Edge10 (arms)" data-origin="intl" data-desc="英国発のAMS。選手のコンディション・トレーニング・怪我を統合管理。" href="https://edge10group.com" target="_blank">
+            <div class="company-logo"><img src="https://icon.horse/icon/edge10group.com" alt="Edge10 (arms)" onerror="this.parentElement.classList.add('no-img')"><span class="fallback">E1</span></div><div class="company-name">Edge10</div>
+          </a>
+          <a class="company-card intl-card" data-name="Kinduct" data-origin="intl" data-desc="データ統合型のアスリートパフォーマンス管理プラットフォーム。" href="https://www.kinduct.com" target="_blank">
+            <div class="company-logo"><img src="https://icon.horse/icon/kinduct.com" alt="Kinduct" onerror="this.parentElement.classList.add('no-img')"><span class="fallback">KD</span></div><div class="company-name">Kinduct</div>
+          </a>
+          <a class="company-card intl-card" data-name="CoachMePlus" data-origin="intl" data-desc="S&C・ウェルネス・トレーニングデータの統合管理AMS。" href="https://coachmeplus.com" target="_blank">
+            <div class="company-logo"><img src="https://icon.horse/icon/coachmeplus.com" alt="CoachMePlus" onerror="this.parentElement.classList.add('no-img')"><span class="fallback">CM</span></div><div class="company-name">CoachMePlus</div>
+          </a>
+          <a class="company-card intl-card" data-name="Mindbody" data-origin="intl" data-desc="フィットネス施設の予約・会員管理・ビジネス運営プラットフォーム。" href="https://www.mindbodyonline.com" target="_blank">
+            <div class="company-logo"><img src="https://icon.horse/icon/mindbodyonline.com" alt="Mindbody" onerror="this.parentElement.classList.add('no-img')"><span class="fallback">MB</span></div><div class="company-name">Mindbody</div>
+          </a>
+          <a class="company-card jp-card" data-name="ONE TAP SPORTS" data-origin="jp" data-desc="日本発のコンディション管理アプリ。Jリーグ等で多数採用。" href="https://one-tap.jp" target="_blank">
+            <div class="company-logo"><img src="https://icon.horse/icon/one-tap.jp" alt="ONE TAP SPORTS" onerror="this.parentElement.classList.add('no-img')"><span class="fallback">OT</span></div><div class="company-name">ONE TAP SPORTS</div>
+          </a>
+          <a class="company-card jp-card" data-name="アトレタ" data-origin="jp" data-desc="日本発のアスリートコンディション管理プラットフォーム。" href="https://atleta.jp" target="_blank">
+            <div class="company-logo"><img src="https://icon.horse/icon/atleta.jp" alt="アトレタ" onerror="this.parentElement.classList.add('no-img')"><span class="fallback">AT</span></div><div class="company-name">アトレタ</div>
+          </a>
+          <a class="company-card jp-card" data-name="NEXT BASE" data-origin="jp" data-desc="日本発のスポーツコンディション管理ソフトウェア。" href="https://nextbase.jp" target="_blank">
+            <div class="company-logo"><img src="https://icon.horse/icon/nextbase.jp" alt="NEXT BASE" onerror="this.parentElement.classList.add('no-img')"><span class="fallback">NB</span></div><div class="company-name">NEXT BASE</div>
+          </a>
+        </div>
+      </div>
+
+      <div class="subcategory">
+        <div class="sub-label">B. 運営・フロント業務 / Operations & Front Office</div>
+        <div class="company-grid">
+          <a class="company-card intl-card" data-name="Teamworks" data-origin="intl" data-desc="チームオペレーション統合プラットフォーム。スケジュール・コミュニケーション・コンプライアンス管理。" href="https://www.teamworks.com" target="_blank">
+            <div class="company-logo"><img src="https://icon.horse/icon/teamworks.com" alt="Teamworks" onerror="this.parentElement.classList.add('no-img')"><span class="fallback">TW</span></div><div class="company-name">Teamworks</div>
+          </a>
+          <a class="company-card intl-card" data-name="Kairos" data-origin="intl" data-desc="チーム運営・スケジュール・コミュニケーション管理ツール。" href="https://www.kairosapp.com" target="_blank">
+            <div class="company-logo"><img src="https://icon.horse/icon/kairosapp.com" alt="Kairos" onerror="this.parentElement.classList.add('no-img')"><span class="fallback">KA</span></div><div class="company-name">Kairos</div>
+          </a>
+          <a class="company-card intl-card" data-name="Goalline (Stack Sports)" data-origin="intl" data-desc="リーグ・大会運営向け登録・スケジュール管理プラットフォーム。" href="https://www.stacksports.com" target="_blank">
+            <div class="company-logo"><img src="https://icon.horse/icon/stacksports.com" alt="Goalline (Stack Sports)" onerror="this.parentElement.classList.add('no-img')"><span class="fallback">GL</span></div><div class="company-name">Goalline</div>
+          </a>
+        </div>
+      </div>
+
+      <div class="subcategory">
+        <div class="sub-label">C. データ可視化 / Reporting, BI & Stats</div>
+        <div class="company-grid">
+          <a class="company-card intl-card" data-name="Tableau" data-origin="intl" data-desc="直感的なデータビジュアライゼーション・BIツール。Salesforce傘下。" href="https://www.tableau.com" target="_blank">
+            <div class="company-logo"><img src="https://icon.horse/icon/tableau.com" alt="Tableau" onerror="this.parentElement.classList.add('no-img')"><span class="fallback">TB</span></div><div class="company-name">Tableau</div>
+          </a>
+          <a class="company-card intl-card" data-name="Power BI" data-origin="intl" data-desc="Microsoft発のBIツール。データ分析・レポート作成・ダッシュボード構築。" href="https://powerbi.microsoft.com" target="_blank">
+            <div class="company-logo"><img src="https://icon.horse/icon/microsoft.com" alt="Power BI" onerror="this.parentElement.classList.add('no-img')"><span class="fallback">PB</span></div><div class="company-name">Power BI</div>
+          </a>
+          <a class="company-card intl-card" data-name="Sports LOGiQ (Teamworks)" data-origin="intl" data-desc="AIベースのスポーツ統計・分析プラットフォーム。現Teamworks傘下。" href="https://sportslogiq.com" target="_blank">
+            <div class="company-logo"><img src="https://icon.horse/icon/sportslogiq.com" alt="Sports LOGiQ (Teamworks)" onerror="this.parentElement.classList.add('no-img')"><span class="fallback">SL</span></div><div class="company-name">Sports LOGiQ</div>
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer">
+    <p>Sports Technology Chaos Map &copy; 2026 | 日本ソリューション<span style="color:#ef4444;"> ●</span> 海外ソリューション<span style="color:#3b82f6;"> ●</span></p>
+    <p style="margin-top:6px;">記載条件：プロで採用 / サッカー・野球・バスケ・バレーボール・ラグビーを中心</p>
+  </div>
+</div>
+
+<!-- Tooltip -->
+<div class="tooltip" id="tooltip">
+  <div class="tt-name" id="ttName"></div>
+  <div class="tt-origin" id="ttOrigin"></div>
+  <div class="tt-desc" id="ttDesc"></div>
+</div>
+
+<script>
+  // Tooltip
+  const tooltip = document.getElementById('tooltip');
+  const ttName = document.getElementById('ttName');
+  const ttOrigin = document.getElementById('ttOrigin');
+  const ttDesc = document.getElementById('ttDesc');
+
+  document.querySelectorAll('.company-card').forEach(card => {
+    card.addEventListener('mouseenter', e => {
+      ttName.textContent = card.dataset.name;
+      ttOrigin.textContent = card.dataset.origin === 'jp' ? '🇯🇵 日本' : '🌍 海外';
+      ttOrigin.className = 'tt-origin ' + card.dataset.origin;
+      ttDesc.textContent = card.dataset.desc;
+      tooltip.classList.add('visible');
+    });
+
+    card.addEventListener('mousemove', e => {
+      const x = e.clientX + 16;
+      const y = e.clientY + 16;
+      const tw = tooltip.offsetWidth;
+      const th = tooltip.offsetHeight;
+      tooltip.style.left = (x + tw > window.innerWidth ? e.clientX - tw - 10 : x) + 'px';
+      tooltip.style.top = (y + th > window.innerHeight ? e.clientY - th - 10 : y) + 'px';
+    });
+
+    card.addEventListener('mouseleave', () => {
+      tooltip.classList.remove('visible');
+    });
+  });
+
+  // Filter
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const categories = document.querySelectorAll('.category');
+  const cards = document.querySelectorAll('.company-card');
+
+  function updateStats() {
+    const visible = document.querySelectorAll('.company-card:not(.hidden)').length;
+    const jp = document.querySelectorAll('.company-card.jp-card:not(.hidden)').length;
+    const intl = document.querySelectorAll('.company-card.intl-card:not(.hidden)').length;
+    document.getElementById('statsBar').innerHTML =
+      `<span>表示中: ${visible}社</span> <span>🇯🇵 ${jp}社</span> <span>🌍 ${intl}社</span>`;
+  }
+
+  function applyFilter(filter) {
+    cards.forEach(c => {
+      let show = true;
+      if (filter === 'jp') show = c.dataset.origin === 'jp';
+      else if (filter === 'intl') show = c.dataset.origin === 'intl';
+      else if (filter !== 'all') {
+        show = c.closest('.category')?.dataset.cat === filter;
+      }
+      c.classList.toggle('hidden', !show);
+    });
+
+    categories.forEach(cat => {
+      if (filter === 'all' || filter === 'jp' || filter === 'intl') {
+        const hasVisible = cat.querySelectorAll('.company-card:not(.hidden)').length > 0;
+        cat.classList.toggle('hidden-cat', !hasVisible);
+      } else {
+        cat.classList.toggle('hidden-cat', cat.dataset.cat !== filter);
+      }
+    });
+    updateStats();
+  }
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('searchInput').value = '';
+      applyFilter(btn.dataset.filter);
+    });
+  });
+
+  // Search
+  document.getElementById('searchInput').addEventListener('input', e => {
+    const q = e.target.value.toLowerCase().trim();
+    filterBtns.forEach(b => b.classList.remove('active'));
+    if (!q) {
+      filterBtns[0].classList.add('active');
+      applyFilter('all');
+      return;
+    }
+
+    cards.forEach(c => {
+      const name = c.dataset.name.toLowerCase();
+      const desc = c.dataset.desc.toLowerCase();
+      c.classList.toggle('hidden', !name.includes(q) && !desc.includes(q));
+    });
+
+    categories.forEach(cat => {
+      const hasVisible = cat.querySelectorAll('.company-card:not(.hidden)').length > 0;
+      cat.classList.toggle('hidden-cat', !hasVisible);
+    });
+    updateStats();
+  });
+
+  // Initial stats
+  applyFilter('all');
+
+</script>
+</body>
+</html>
