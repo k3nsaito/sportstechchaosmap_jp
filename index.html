@@ -413,6 +413,327 @@
     display: none;
   }
 
+
+  /* Recommendation Section */
+  .recommend-section {
+    margin-bottom: 40px;
+    border-radius: 20px;
+    padding: 32px;
+    background: linear-gradient(135deg, rgba(99,102,241,0.08) 0%, rgba(168,85,247,0.06) 50%, rgba(59,130,246,0.04) 100%);
+    border: 1px solid rgba(139,92,246,0.15);
+    position: relative;
+  }
+
+  .recommend-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 6px;
+  }
+
+  .recommend-icon {
+    width: 48px; height: 48px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    flex-shrink: 0;
+  }
+
+  .recommend-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+  }
+
+  .recommend-subtitle {
+    font-size: 0.8rem;
+    color: #8888aa;
+    margin-bottom: 28px;
+  }
+
+  .q-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 28px;
+  }
+
+  @media (max-width: 768px) {
+    .q-grid { grid-template-columns: 1fr; }
+  }
+
+  .q-item {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .q-label {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: #c0c0e0;
+  }
+
+  .q-label .q-num {
+    display: inline-block;
+    width: 22px; height: 22px;
+    border-radius: 6px;
+    background: rgba(99,102,241,0.25);
+    text-align: center;
+    line-height: 22px;
+    font-size: 0.7rem;
+    margin-right: 6px;
+    color: #a5b4fc;
+  }
+
+  .q-select {
+    padding: 10px 14px;
+    border-radius: 10px;
+    border: 1px solid rgba(255,255,255,0.1);
+    background: rgba(255,255,255,0.05);
+    color: #e0e0f0;
+    font-size: 0.85rem;
+    font-family: inherit;
+    outline: none;
+    cursor: pointer;
+    transition: all 0.3s;
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M6 8L1 3h10z' fill='%238888aa'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    padding-right: 32px;
+  }
+
+  .q-select:focus {
+    border-color: rgba(99,102,241,0.5);
+    box-shadow: 0 0 16px rgba(99,102,241,0.1);
+  }
+
+  .q-select option {
+    background: #1a1a2e;
+    color: #e0e0f0;
+  }
+
+  .recommend-actions {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .btn-recommend {
+    padding: 12px 32px;
+    border-radius: 12px;
+    border: none;
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    color: #fff;
+    font-size: 0.9rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-family: inherit;
+    letter-spacing: 0.02em;
+  }
+
+  .btn-recommend:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(99,102,241,0.3);
+  }
+
+  .btn-recommend:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+  }
+
+  .btn-reset {
+    padding: 10px 24px;
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,0.1);
+    background: transparent;
+    color: #8888aa;
+    font-size: 0.82rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-family: inherit;
+  }
+
+  .btn-reset:hover {
+    background: rgba(255,255,255,0.05);
+    color: #c0c0e0;
+  }
+
+  .q-progress {
+    margin-left: auto;
+    font-size: 0.75rem;
+    color: #6666888;
+  }
+
+  .q-progress-bar {
+    width: 120px;
+    height: 4px;
+    background: rgba(255,255,255,0.06);
+    border-radius: 2px;
+    overflow: hidden;
+    margin-top: 4px;
+  }
+
+  .q-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #6366f1, #8b5cf6);
+    border-radius: 2px;
+    transition: width 0.4s;
+  }
+
+  /* Results panel */
+  .results-panel {
+    display: none;
+    margin-top: 28px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .results-panel.visible {
+    display: block;
+    animation: fadeIn 0.5s ease;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .results-title {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .results-count {
+    font-size: 0.75rem;
+    color: #8888aa;
+    font-weight: 400;
+    background: rgba(255,255,255,0.06);
+    padding: 2px 10px;
+    border-radius: 8px;
+  }
+
+  .result-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 14px;
+  }
+
+  .result-card {
+    padding: 18px;
+    border-radius: 14px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    transition: all 0.3s;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+
+  .result-card:hover {
+    background: rgba(255,255,255,0.08);
+    border-color: rgba(255,255,255,0.15);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+  }
+
+  .result-card-top {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 10px;
+  }
+
+  .result-card-logo {
+    width: 40px; height: 40px;
+    border-radius: 10px;
+    overflow: hidden;
+    flex-shrink: 0;
+    background: #fff;
+  }
+
+  .result-card-logo img {
+    width: 100%; height: 100%;
+    object-fit: contain;
+    padding: 4px;
+  }
+
+  .result-card-logo .rc-fallback {
+    width: 100%; height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 0.7rem;
+    color: #fff;
+    border-radius: 10px;
+  }
+
+  .result-card-logo .rc-fallback.jp { background: linear-gradient(135deg, #dc2626, #b91c1c); }
+  .result-card-logo .rc-fallback.intl { background: linear-gradient(135deg, #2563eb, #1d4ed8); }
+
+  .result-card-name {
+    font-size: 0.95rem;
+    font-weight: 700;
+  }
+
+  .result-card-cat {
+    font-size: 0.68rem;
+    color: #8888aa;
+  }
+
+  .result-match {
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 8px;
+    margin-left: auto;
+  }
+
+  .match-high { background: rgba(16,185,129,0.2); color: #6ee7b7; }
+  .match-mid { background: rgba(245,158,11,0.2); color: #fcd34d; }
+  .match-low { background: rgba(239,68,68,0.15); color: #fca5a5; }
+
+  .result-card-desc {
+    font-size: 0.78rem;
+    color: #9999bb;
+    line-height: 1.5;
+    margin-bottom: 10px;
+  }
+
+  .result-card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .rc-tag {
+    font-size: 0.65rem;
+    padding: 3px 8px;
+    border-radius: 6px;
+    background: rgba(255,255,255,0.06);
+    color: #8888bb;
+  }
+
+  .no-results {
+    text-align: center;
+    padding: 40px;
+    color: #666688;
+    font-size: 0.9rem;
+  }
+
   /* Responsive */
   @media (max-width: 768px) {
     .header h1 { font-size: 1.8rem; }
@@ -439,6 +760,111 @@
   <div class="legend">
     <div class="legend-item"><div class="legend-dot jp"></div>日本ソリューション</div>
     <div class="legend-item"><div class="legend-dot intl"></div>海外ソリューション</div>
+  </div>
+
+
+  <!-- Recommendation Engine -->
+  <div class="recommend-section" id="recommendSection">
+    <div class="recommend-header">
+      <div class="recommend-icon">🎯</div>
+      <div class="recommend-title">ソリューション診断</div>
+    </div>
+    <div class="recommend-subtitle">6つの質問に答えるだけで、あなたに最適なスポーツテックソリューションを提案します。</div>
+
+    <div class="q-grid">
+      <div class="q-item">
+        <label class="q-label"><span class="q-num">1</span>あなたの役割は？</label>
+        <select class="q-select" id="qRole">
+          <option value="">選択してください</option>
+          <option value="sc">S&Cコーチ / フィジカルコーチ</option>
+          <option value="analyst">パフォーマンス分析者</option>
+          <option value="medical">メディカル / AT / 理学療法士</option>
+          <option value="coach">監督 / ヘッドコーチ</option>
+          <option value="front">フロント / GM / 強化部</option>
+          <option value="nutritionist">栄養士</option>
+          <option value="researcher">研究者</option>
+          <option value="player">選手本人</option>
+        </select>
+      </div>
+
+      <div class="q-item">
+        <label class="q-label"><span class="q-num">2</span>どのようなソリューションを探していますか？</label>
+        <select class="q-select" id="qPurpose">
+          <option value="">選択してください</option>
+          <option value="training">トレーニングの管理・プログラミング</option>
+          <option value="wearable">選手の動き・負荷をリアルタイム計測</option>
+          <option value="testing">筋力テスト・バイオメカニクス評価</option>
+          <option value="recovery">リカバリー・睡眠・コンディション管理</option>
+          <option value="medical">メディカル・身体組成の管理</option>
+          <option value="nutrition">栄養・水分補給管理</option>
+          <option value="video">映像撮影・分析</option>
+          <option value="tracking">選手トラッキング・試合統計データ</option>
+          <option value="cognitive">認知トレーニング・VR/AR</option>
+          <option value="ams">選手データの一元管理（AMS）</option>
+          <option value="ops">チーム運営・スケジュール管理</option>
+          <option value="bi">データ可視化・BI</option>
+        </select>
+      </div>
+
+      <div class="q-item">
+        <label class="q-label"><span class="q-num">3</span>月額予算の目安は？</label>
+        <select class="q-select" id="qBudget">
+          <option value="">選択してください</option>
+          <option value="1">~5万円/月</option>
+          <option value="2">5~20万円/月</option>
+          <option value="3">20~50万円/月</option>
+          <option value="4">50万円+/月（要見積もりOK）</option>
+        </select>
+      </div>
+
+      <div class="q-item">
+        <label class="q-label"><span class="q-num">4</span>主に誰が使いますか？</label>
+        <select class="q-select" id="qUser">
+          <option value="">選択してください</option>
+          <option value="individual">選手個人</option>
+          <option value="small">少人数スタッフ（1~3名）</option>
+          <option value="team">チームスタッフ（4名以上）</option>
+          <option value="org">組織全体（複数部門）</option>
+        </select>
+      </div>
+
+      <div class="q-item">
+        <label class="q-label"><span class="q-num">5</span>導入時期は？</label>
+        <select class="q-select" id="qTimeline">
+          <option value="">選択してください</option>
+          <option value="asap">すぐに導入したい</option>
+          <option value="quarter">1~3ヶ月以内</option>
+          <option value="half">3~6ヶ月以内</option>
+          <option value="exploring">情報収集中（時期未定）</option>
+        </select>
+      </div>
+
+      <div class="q-item">
+        <label class="q-label"><span class="q-num">6</span>日本語対応は必要ですか？</label>
+        <select class="q-select" id="qJapanese">
+          <option value="">選択してください</option>
+          <option value="required">必須</option>
+          <option value="preferred">あると嬉しい</option>
+          <option value="any">不要（英語OK）</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="recommend-actions">
+      <button class="btn-recommend" id="btnRecommend" disabled>診断する</button>
+      <button class="btn-reset" id="btnReset">リセット</button>
+      <div class="q-progress">
+        <span id="qProgressText">0 / 6 回答済み</span>
+        <div class="q-progress-bar"><div class="q-progress-fill" id="qProgressFill" style="width:0%"></div></div>
+      </div>
+    </div>
+
+    <div class="results-panel" id="resultsPanel">
+      <div class="results-title">
+        おすすめソリューション <span class="results-count" id="resultsCount"></span>
+      </div>
+      <div class="result-cards" id="resultCards"></div>
+    </div>
   </div>
 
   <div class="filter-bar" id="filterBar">
@@ -1003,6 +1429,236 @@
 
   // Initial stats
   applyFilter('all');
+
+
+  // ===== RECOMMENDATION ENGINE =====
+  const solutionDB = [
+    // [name, origin, category, subcategory, desc, features, sports, targetScale, targetUser, price, deployType, platform, delivery, api, japaneseSupport, japaneseAgent, url, budgetScore, teamScore, techScore, logoUrl]
+    ["BRIDGE","intl","cat-1","training","アスリート向けトレーニングプラットフォーム","ワークアウト設計・配信・進捗管理","マルチ","pro_univ","sc",2,"sub","ios_android_web","cloud",1,0,0,"bridgeathletic.com",2,3,2],
+    ["Volt Athletics","intl","cat-1","training","AI搭載トレーニングプログラム自動生成","AIプログラム生成・個別最適化","マルチ","pro_univ_ind","sc_player",2,"sub","ios_android_web","cloud",1,0,0,"voltathletics.com",2,2,1],
+    ["TeamBuildr","intl","cat-1","training","S&Cコーチ向けトレーニング管理ツール","プログラム作成・選手管理・データ記録","マルチ","pro_univ","sc",2,"sub","ios_android_web","cloud",1,0,0,"teambuildr.com",2,3,2],
+    ["TrainHeroic","intl","cat-1","training","コーチとアスリートを繋ぐトレーニングマーケットプレイス","プログラム販売・配信・VBT連携","マルチ","pro_ind","sc_player",2,"sub","ios_android_web","cloud",1,0,0,"trainheroic.com",2,2,2],
+    ["Catapult","intl","cat-1","wearable","GPS・慣性センサーで選手パフォーマンス計測","リアルタイムGPS・加速度・心拍・負荷管理","サッカー/ラグビー/バスケ","pro","analyst_sc",4,"device_sub","ios_web","hybrid",1,0,1,"catapultsports.com",4,4,3],
+    ["WHOOP","intl","cat-1","wearable","24/7心拍・睡眠・リカバリーモニタリング","心拍変動・睡眠分析・ストレインスコア","マルチ","pro_ind","player_sc",2,"sub","ios_android","cloud",1,0,0,"whoop.com",2,1,1],
+    ["Oura","intl","cat-1","wearable","睡眠・回復・活動量追跡スマートリング","睡眠スコア・HRV・体温・活動量","マルチ","pro_ind","player_medical",2,"device_sub","ios_android","cloud",1,1,0,"ouraring.com",2,1,1],
+    ["Garmin","intl","cat-1","wearable","GPSスポーツウォッチ＆デバイス","GPS・心拍・VO2max・トレーニング負荷","マルチ","pro_ind","player_coach",2,"device","ios_android_web","hybrid",1,1,1,"garmin.com",2,1,1],
+    ["Polar","intl","cat-1","wearable","心拍センサー＆GPSウォッチのパイオニア","心拍ゾーン・トレーニング負荷・チーム管理","マルチ","pro_univ_ind","sc_player",2,"device_sub","ios_android_web","hybrid",1,1,1,"polar.com",2,2,2],
+    ["STATSports","intl","cat-1","wearable","GPSベスト型パフォーマンスデータ取得","GPS・加速度・心拍・スプリント分析","サッカー/ラグビー","pro_youth","analyst_sc",3,"device_sub","ios_android_web","hybrid",1,0,0,"statsports.com",3,3,2],
+    ["KINEXON","intl","cat-1","wearable","UWB技術で高精度リアルタイム位置追跡","屋内外位置追跡・ボールトラッキング","バスケ/サッカー","pro","analyst_coach",4,"license","web","onprem_cloud",1,0,0,"kinexon.com",4,4,4],
+    ["PlayerData","intl","cat-1","wearable","小型GPSトラッカーで選手データ取得","GPS・速度・距離・スプリント","サッカー/ラグビー","pro_amateur","coach_player",2,"device_sub","ios_android_web","cloud",1,0,0,"playerdata.com",2,2,1],
+    ["VALD","intl","cat-1","testing","NordBord等で筋力・パワーを科学的評価","フォースプレート・ハムストリング評価","マルチ","pro_univ_research","sc_medical_researcher",3,"device_sub","ios_web","cloud",1,0,1,"vfrce.com",3,3,3],
+    ["Hawkin Dynamics","intl","cat-1","testing","ポータブルフォースプレート","ジャンプ・着地力学データ・クラウド管理","マルチ","pro_univ","sc",3,"device_sub","ios_android_web","cloud",1,0,0,"hawkindynamics.com",3,3,2],
+    ["Sparta Science","intl","cat-1","testing","フォースプレートとAIで怪我リスク予測","ジャンプ評価・AI怪我リスク予測","マルチ","pro_univ","sc_medical",3,"device_sub","web","cloud",1,0,0,"spartascience.com",3,3,3],
+    ["Hyperice","intl","cat-2","recovery","バイブレーション・コンプレッションリカバリー","マッサージガン・コンプレッションブーツ","マルチ","pro_ind","player_medical",2,"device","ios_android","local",0,0,1,"hyperice.com",2,1,1],
+    ["Rise","intl","cat-2","recovery","睡眠負債と概日リズム追跡","睡眠負債計算・最適パフォーマンス時間特定","マルチ","pro_ind","player_sc",1,"sub","ios_android","cloud",0,1,0,"risescience.com",1,1,1],
+    ["SOMNOFY","intl","cat-2","recovery","非接触型睡眠モニタリングデバイス","レーダー式睡眠計測・環境センサー","マルチ","pro","medical_sc",2,"device","web","cloud",1,0,0,"somnofy.com",2,2,2],
+    ["InBody","intl","cat-2","medical","体組成計のグローバルリーダー","体脂肪率・筋肉量・水分量・セグメント分析","マルチ","pro_univ_facility","sc_medical_nutritionist",2,"device","web","local_cloud",1,1,1,"inbody.com",2,2,1],
+    ["Kitman Labs","intl","cat-2","medical","150+データソース統合のアスリートデータPF","データ統合・怪我予測・パフォーマンス最適化","サッカー/ラグビー/バスケ","pro","director_medical",4,"sub","web","cloud",1,0,1,"kitmanlabs.com",4,4,3],
+    ["MyFitnessPal","intl","cat-2","nutrition","食事ログ・カロリー・栄養素トラッキング","フードログ・カロリー計算・マクロ管理","マルチ","ind","player_nutritionist",1,"freemium","ios_android_web","cloud",1,1,0,"myfitnesspal.com",1,1,1],
+    ["Notemeal","intl","cat-2","nutrition","チームスポーツ向け栄養管理","食事計画・チーム栄養管理・オーダリング","マルチ","pro_univ","nutritionist_ops",3,"sub","web","cloud",1,0,0,"notemeal.com",3,3,2],
+    ["Hudl","intl","cat-3","video","世界最大のスポーツ映像分析プラットフォーム","映像アップロード・タグ付け・共有","マルチ","pro_univ_youth","analyst_coach",2,"sub","ios_android_web","cloud",1,0,1,"hudl.com",2,2,2],
+    ["Dartfish","intl","cat-3","video","映像解析・タグ付け・パフォーマンス比較","スロー・アングル比較・タグ付け","マルチ","pro_univ","analyst_coach",2,"sub","win_mac_web","hybrid",1,0,1,"dartfish.com",2,2,2],
+    ["Spiideo","intl","cat-3","video","AI自動カメラで試合を無人撮影","固定カメラ自動撮影・ライブ・分析","サッカー","pro_univ","analyst",3,"sub_install","web","cloud",1,0,0,"spiideo.com",3,3,2],
+    ["Pixellot","intl","cat-3","video","AI搭載無人カメラで自動撮影・制作","AI自動撮影・ハイライト生成","マルチ","pro_amateur_youth","ops_coach",2,"sub_install","web","cloud",1,0,0,"pixellot.tv",2,2,1],
+    ["FL-UX","jp","cat-3","video","日本発のスポーツ映像解析ソリューション","映像分析・タグ付け・チーム共有","サッカー","pro_youth","analyst_coach",2,"sub","web","cloud",0,1,0,"fl-ux.jp",2,2,1],
+    ["SPLYZA Teams","jp","cat-3","video","チーム映像共有・分析で選手の学び促進","映像共有・タグ付け・ディスカッション","マルチ","youth_amateur_pro","coach_player",1,"sub","ios_android_web","cloud",0,1,0,"splyza.com",1,1,1],
+    ["Playbox","jp","cat-3","video","日本発の試合分析ツール","タグ付け・クリップ作成・戦術分析","サッカー","pro_youth","analyst_coach",2,"sub","web","cloud",0,1,0,"playbox.jp",2,2,1],
+    ["Second Spectrum","intl","cat-3","tracking","CVでリアルタイム選手・ボール追跡","光学トラッキング・AI戦術分析","バスケ/サッカー","pro","analyst",4,"license","web","cloud",1,0,0,"secondspectrum.com",4,4,4],
+    ["Sportradar","intl","cat-3","tracking","スポーツデータ・AI分析グローバルリーダー","試合データ・オッズ・AI予測","マルチ","pro_media","front_analyst",4,"license","web_api","cloud",1,0,0,"sportradar.com",4,4,4],
+    ["Opta","intl","cat-3","tracking","サッカー中心のイベントデータプロバイダー","イベントデータ・選手評価・詳細統計","サッカー","pro_media","analyst_front",4,"license","web_api","cloud",1,0,0,"statsperform.com",4,4,4],
+    ["Trackman","intl","cat-3","tracking","ドップラーレーダーでボール軌道精密計測","ボール速度・回転・軌道","ゴルフ/野球","pro","analyst_coach",4,"device_sub","ios_web","hybrid",1,1,1,"trackman.com",4,3,3],
+    ["Rapsodo","intl","cat-3","tracking","カメラ＆レーダーで投球・打球データ計測","投球・打球データ・バーチャルモデル","ゴルフ/野球","pro_amateur","coach_player",2,"device","ios_android","cloud",1,1,1,"rapsodo.com",2,2,2],
+    ["Deltatore","jp","cat-3","tracking","日本発スポーツデータ分析企業","Jリーグデータ・トラッキング・統計","サッカー","pro","analyst",3,"license","web","cloud",1,1,0,"deltatore.com",3,3,2],
+    ["Knows","jp","cat-3","tracking","日本発光学式トラッキングシステム","選手位置情報・高精度光学トラッキング","サッカー","pro","analyst_coach",3,"license_install","web","onprem",1,1,0,"knows-inc.com",3,3,3],
+    ["Football Box","jp","cat-3","tracking","サッカー特化光学式トラッキング","光学トラッキング・チーム統計","サッカー","pro_youth","analyst_coach",2,"license_install","web","onprem",0,1,0,"footballbox.jp",2,3,2],
+    ["NeuroTracker","intl","cat-4","cognitive","3D多物体追跡で認知能力トレーニング","認知トレーニング・集中力・ベンチマーク","マルチ","pro_ind","mental_sc",2,"sub","win_mac_vr","local_cloud",0,0,0,"neurotracker.net",2,1,2],
+    ["REZZIL","intl","cat-4","cognitive","VR認知トレーニング（サッカー向け）","VRスキルトレーニング・認知評価","サッカー","pro_youth","coach_player",2,"sub","vr","cloud",0,0,0,"rezzil.com",2,2,2],
+    ["STRIVR","intl","cat-4","cognitive","VRイマーシブトレーニングPF","VR意思決定トレーニング・シナリオ","アメフト/バスケ","pro","coach_player",4,"license_device","vr","hybrid",0,0,0,"strivr.com",4,4,3],
+    ["Sportip","jp","cat-4","cognitive","日本発AIポーズ推定フォーム解析","スマホ映像からAI骨格推定・フォーム評価","マルチ","pro_ind_gym","coach_pt_player",2,"sub","ios_android_web","cloud",1,1,0,"sportip.ai",2,1,1],
+    ["SPLYZA motion","jp","cat-4","cognitive","スマホ映像からAI骨格推定・動作分析","ポーズ推定・角度計測・動作比較","マルチ","pro_youth_ind","coach_player_researcher",1,"sub","ios_android","cloud",0,1,0,"splyza.com",1,1,1],
+    ["Smartabase","intl","cat-5","ams","カスタマイズ可能なAMS","データ統合・ワークフロー・カスタムフォーム","マルチ","pro","director_medical",4,"sub","web","cloud",1,0,0,"teamworks.com",4,4,3],
+    ["Kitman Labs AMS","intl","cat-5","ams","150+データソース統合AMS","データ統合・怪我予測・パフォーマンス最適化","マルチ","pro","director_medical",4,"sub","web","cloud",1,0,1,"kitmanlabs.com",4,4,3],
+    ["CoachMePlus","intl","cat-5","ams","S&C・ウェルネスデータ統合AMS","トレーニング管理・ウェルネス・データ統合","マルチ","pro_univ","sc",3,"sub","ios_web","cloud",1,0,0,"coachmeplus.com",3,3,2],
+    ["ONE TAP SPORTS","jp","cat-5","ams","日本発コンディション管理アプリ","コンディション入力・体調管理・チーム可視化","サッカー/野球/バスケ","pro_youth","sc_medical_player",2,"sub","ios_android_web","cloud",0,1,0,"one-tap.jp",2,2,1],
+    ["アトレタ","jp","cat-5","ams","日本発アスリートコンディション管理PF","コンディション記録・体調管理・分析","マルチ","pro_youth","coach_player",1,"sub","ios_android_web","cloud",0,1,0,"atleta.jp",1,1,1],
+    ["NEXT BASE","jp","cat-5","ams","日本発スポーツコンディション管理ソフト","コンディション記録・データ分析・レポート","マルチ","pro_univ","sc_medical",2,"sub","web","cloud",0,1,0,"nextbase.jp",2,2,2],
+    ["Teamworks","intl","cat-5","ops","チームオペレーション統合PF","スケジュール・コミュニケーション・コンプライアンス","マルチ","pro_univ","ops_gm",3,"sub","ios_android_web","cloud",1,0,0,"teamworks.com",3,3,2],
+    ["Tableau","intl","cat-5","bi","直感的データビジュアライゼーション・BIツール","ダッシュボード・データ接続・可視化","汎用","pro_enterprise","analyst_front",3,"sub","win_mac_web","hybrid",1,1,1,"tableau.com",3,2,3],
+    ["Power BI","intl","cat-5","bi","Microsoft発BIツール","ダッシュボード・レポート・データモデリング","汎用","pro_enterprise","analyst_front",2,"sub","win_web","hybrid",1,1,1,"microsoft.com",2,2,2],
+  ];
+
+  // Mapping: purpose -> subcategories
+  const purposeMap = {
+    training: ['training'],
+    wearable: ['wearable'],
+    testing: ['testing'],
+    recovery: ['recovery'],
+    medical: ['medical'],
+    nutrition: ['nutrition'],
+    video: ['video'],
+    tracking: ['tracking'],
+    cognitive: ['cognitive'],
+    ams: ['ams'],
+    ops: ['ops'],
+    bi: ['bi']
+  };
+
+  // Mapping: role -> target user keywords
+  const roleMap = {
+    sc: ['sc','player_sc','sc_player','analyst_sc','sc_medical','sc_medical_researcher','sc_medical_player','coach_pt_player','coach_player_researcher'],
+    analyst: ['analyst','analyst_sc','analyst_coach','front_analyst'],
+    medical: ['medical','sc_medical','medical_sc','sc_medical_researcher','director_medical','player_medical','sc_medical_player'],
+    coach: ['coach','analyst_coach','coach_player','coach_pt_player','coach_player_researcher','sc_player','ops_coach'],
+    front: ['front','front_analyst','ops_gm','director_medical'],
+    nutritionist: ['nutritionist','player_nutritionist','nutritionist_ops','sc_medical_nutritionist'],
+    researcher: ['researcher','sc_medical_researcher','coach_player_researcher'],
+    player: ['player','player_sc','sc_player','player_medical','player_nutritionist','coach_player','coach_pt_player','coach_player_researcher','sc_medical_player']
+  };
+
+  // User scale mapping
+  const userScaleMap = {
+    individual: 1,
+    small: 2,
+    team: 3,
+    org: 4
+  };
+
+  const selects = ['qRole','qPurpose','qBudget','qUser','qTimeline','qJapanese'].map(id => document.getElementById(id));
+  const btnRecommend = document.getElementById('btnRecommend');
+  const btnReset = document.getElementById('btnReset');
+  const resultsPanel = document.getElementById('resultsPanel');
+  const resultCards = document.getElementById('resultCards');
+  const resultsCount = document.getElementById('resultsCount');
+  const progressText = document.getElementById('qProgressText');
+  const progressFill = document.getElementById('qProgressFill');
+
+  function updateProgress() {
+    const answered = selects.filter(s => s.value !== '').length;
+    progressText.textContent = answered + ' / 6 回答済み';
+    progressFill.style.width = (answered / 6 * 100) + '%';
+    btnRecommend.disabled = answered < 4; // At least 4 answers required
+  }
+
+  selects.forEach(s => s.addEventListener('change', updateProgress));
+
+  btnReset.addEventListener('click', () => {
+    selects.forEach(s => s.value = '');
+    updateProgress();
+    resultsPanel.classList.remove('visible');
+  });
+
+  btnRecommend.addEventListener('click', () => {
+    const role = document.getElementById('qRole').value;
+    const purpose = document.getElementById('qPurpose').value;
+    const budget = parseInt(document.getElementById('qBudget').value) || 0;
+    const userScale = document.getElementById('qUser').value;
+    const timeline = document.getElementById('qTimeline').value;
+    const japanese = document.getElementById('qJapanese').value;
+
+    // Score each solution
+    const scored = solutionDB.map(sol => {
+      const [name, origin, cat, subcat, desc, features, sports, scale, target, price, deploy, platform, delivery, api, jpSupport, jpAgent, domain, budgetSc, teamSc, techSc] = sol;
+      let score = 0;
+      let maxScore = 0;
+
+      // Purpose match (most important: 40 points)
+      if (purpose) {
+        maxScore += 40;
+        const matched = purposeMap[purpose] || [];
+        if (matched.includes(subcat)) score += 40;
+      }
+
+      // Role match (25 points)
+      if (role) {
+        maxScore += 25;
+        const roleTargets = roleMap[role] || [];
+        if (roleTargets.includes(target)) score += 25;
+        else {
+          // Partial match: check if any keyword in target contains role
+          const t = target.split('_');
+          if (t.some(part => part === role || role.includes(part))) score += 12;
+        }
+      }
+
+      // Budget match (15 points)
+      if (budget > 0) {
+        maxScore += 15;
+        const diff = Math.abs(budgetSc - budget);
+        if (diff === 0) score += 15;
+        else if (diff === 1) score += 10;
+        else if (diff === 2) score += 3;
+      }
+
+      // User scale match (10 points)
+      if (userScale) {
+        maxScore += 10;
+        const uScale = userScaleMap[userScale] || 2;
+        const diff = Math.abs(teamSc - uScale);
+        if (diff === 0) score += 10;
+        else if (diff === 1) score += 6;
+        else if (diff === 2) score += 2;
+      }
+
+      // Japanese support (10 points)
+      if (japanese) {
+        maxScore += 10;
+        if (japanese === 'required') {
+          if (jpSupport === 1) score += 10;
+          else score -= 5; // Penalty
+        } else if (japanese === 'preferred') {
+          if (jpSupport === 1) score += 8;
+          else score += 3;
+        } else {
+          score += 5; // No preference
+        }
+      }
+
+      // Timeline bonus: quick deploy for "asap"
+      if (timeline === 'asap') {
+        if (deploy === 'sub' || deploy === 'freemium') score += 3;
+        if (deploy === 'license_install' || deploy === 'license_device') score -= 2;
+      }
+
+      const pct = maxScore > 0 ? Math.round(score / maxScore * 100) : 0;
+      return { name, origin, cat, desc, features, sports, price, jpSupport, jpAgent, domain, pct, subcat };
+    });
+
+    // Sort by score, take top results
+    scored.sort((a, b) => b.pct - a.pct);
+    const topResults = scored.filter(s => s.pct >= 40).slice(0, 12);
+
+    // Render
+    if (topResults.length === 0) {
+      resultCards.innerHTML = '<div class="no-results">条件に合うソリューションが見つかりませんでした。条件を変えて再度お試しください。</div>';
+    } else {
+      resultCards.innerHTML = topResults.map(r => {
+        const matchClass = r.pct >= 75 ? 'match-high' : r.pct >= 55 ? 'match-mid' : 'match-low';
+        const matchLabel = r.pct >= 75 ? '高マッチ' : r.pct >= 55 ? '中マッチ' : '参考';
+        const priceLabel = ['','$','$$','$$$','$$$$'][r.price] || '$$';
+        const jpLabel = r.jpSupport ? '🇯🇵 日本語対応' : '';
+        const originLabel = r.origin === 'jp' ? 'jp' : 'intl';
+        const logoUrl = 'https://icon.horse/icon/' + r.domain;
+
+        return '<a class="result-card" href="https://www.' + r.domain + '" target="_blank">' +
+          '<div class="result-card-top">' +
+            '<div class="result-card-logo"><img src="' + logoUrl + '" alt="' + r.name + '" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\'"><div class="rc-fallback ' + originLabel + '" style="display:none">' + r.name.substring(0,2).toUpperCase() + '</div></div>' +
+            '<div><div class="result-card-name">' + r.name + '</div><div class="result-card-cat">' + r.desc + '</div></div>' +
+            '<span class="result-match ' + matchClass + '">' + matchLabel + ' ' + r.pct + '%</span>' +
+          '</div>' +
+          '<div class="result-card-desc">' + r.features + '</div>' +
+          '<div class="result-card-tags">' +
+            '<span class="rc-tag">' + priceLabel + '</span>' +
+            '<span class="rc-tag">' + r.sports + '</span>' +
+            (jpLabel ? '<span class="rc-tag">' + jpLabel + '</span>' : '') +
+          '</div>' +
+        '</a>';
+      }).join('');
+    }
+
+    resultsCount.textContent = topResults.length + '件';
+    resultsPanel.classList.add('visible');
+    resultsPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
 
 </script>
 </body>
